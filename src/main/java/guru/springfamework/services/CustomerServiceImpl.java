@@ -11,24 +11,32 @@ import java.util.stream.Collectors;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-    private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
+    private final CustomerRepository customerRepository;
 
-    public CustomerServiceImpl(CustomerRepository customerRepository, CustomerMapper customerMapper) {
-        this.customerRepository = customerRepository;
+    public CustomerServiceImpl(CustomerMapper customerMapper, CustomerRepository customerRepository) {
         this.customerMapper = customerMapper;
+        this.customerRepository = customerRepository;
     }
 
     @Override
     public List<CustomerDTO> getAllCustomers() {
-        return this.customerRepository.findAll()
+        return customerRepository
+                .findAll()
                 .stream()
-                .map(this.customerMapper::customerToCustomerDTO)
+                .map(customer -> {
+                   CustomerDTO customerDTO = customerMapper.customerToCustomerDTO(customer);
+                   customerDTO.setCustomerUrl("/api/v1/customers/" + customer.getId());
+                   return customerDTO;
+                })
                 .collect(Collectors.toList());
     }
 
     @Override
     public CustomerDTO getCustomerById(Long id) {
-        return this.customerMapper.customerToCustomerDTO(this.customerRepository.findById(id).get());
+
+        return customerRepository.findById(id)
+                .map(customerMapper::customerToCustomerDTO)
+                .orElseThrow(RuntimeException::new); //todo implement better exception handling
     }
 }
