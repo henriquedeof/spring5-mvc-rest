@@ -36,7 +36,11 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDTO getCustomerById(Long id) {
 
         return customerRepository.findById(id)
-                .map(customerMapper::customerToCustomerDTO)
+                .map(customer -> {
+                    CustomerDTO customerDTO = customerMapper.customerToCustomerDTO(customer);
+                    customerDTO.setCustomerUrl("/api/v1/customers/" + customer.getId());
+                    return customerDTO;
+                })
                 .orElseThrow(RuntimeException::new); //todo implement better exception handling
     }
 }
