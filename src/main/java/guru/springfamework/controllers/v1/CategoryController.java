@@ -4,14 +4,11 @@ import guru.springfamework.api.v1.model.CategoryDTO;
 import guru.springfamework.api.v1.model.CategoryListDTO;
 import guru.springfamework.services.CategoryService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller //I could use @RestController
+//@Controller
 //@RequestMapping({"/api/v1/categories/", "/api/v1/categories"})
+@RestController
 @RequestMapping(CategoryController.BASE_URL)
 public class CategoryController {
 
@@ -24,13 +21,15 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<CategoryListDTO> getAllCategories(){
-        return new ResponseEntity<CategoryListDTO>(new CategoryListDTO(this.categoryService.getAllCategories()), HttpStatus.OK);
+    @ResponseStatus(HttpStatus.OK) //@ResponseStatus(code = HttpStatus.OK)
+    public CategoryListDTO getAllCategories(){      //public ResponseEntity<CategoryListDTO> getAllCategories(){ // Old method signature
+        return new CategoryListDTO(this.categoryService.getAllCategories());
     }
 
     @GetMapping("{name}")
-    public ResponseEntity<CategoryDTO> getCategoryByName(@PathVariable String name){
-        return new ResponseEntity<CategoryDTO>(this.categoryService.getCategoryByName(name), HttpStatus.OK);
+    @ResponseStatus(HttpStatus.OK)
+    public CategoryDTO getCategoryByName(@PathVariable String name){  //public ResponseEntity<CategoryDTO> getCategoryByName(@PathVariable String name){// Old method signature
+        return this.categoryService.getCategoryByName(name);
     }
 
 }
