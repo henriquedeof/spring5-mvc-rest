@@ -55,5 +55,4 @@ public class CustomerController {
 
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
-
 }
