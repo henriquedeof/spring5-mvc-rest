@@ -9,8 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping({"/api/v1/customers/", "/api/v1/customers"})
+//@RequestMapping({"/api/v1/customers/", "/api/v1/customers"})
+@RequestMapping(CustomerController.BASE_URL)
 public class CustomerController {
+
+    public static final String BASE_URL = "/api/v1/customers";
 
     private final CustomerService customerService;
 
@@ -23,7 +26,7 @@ public class CustomerController {
         return new ResponseEntity<CustomerListDTO>(new CustomerListDTO(this.customerService.getAllCustomers()), HttpStatus.OK);
     }
 
-    @GetMapping("{id}")
+    @GetMapping({"/{id}"})
     public ResponseEntity<CustomerDTO> getCustomerById(@PathVariable Long id){
         return new ResponseEntity<CustomerDTO>(this.customerService.getCustomerById(id), HttpStatus.OK);
     }
@@ -46,8 +49,10 @@ public class CustomerController {
     }
 
     @DeleteMapping({"/{id}"})
-    public ResponseEntity<Void> deleteCustomerById(@PathVariable Long id){
-        this.customerService.deleteCustomerById(id);
+    public ResponseEntity<Void> deleteCustomer(@PathVariable Long id){
+
+        customerService.deleteCustomerById(id);
+
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
