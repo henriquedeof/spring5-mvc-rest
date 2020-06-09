@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 @Service
 public class VendorServiceImpl implements VendorService {
 
-    private VendorRepository vendorRepository;
-    private VendorMapper vendorMapper;
+    private final VendorRepository vendorRepository;
+    private final VendorMapper vendorMapper;
 
     public VendorServiceImpl(VendorRepository vendorRepository, VendorMapper vendorMapper) {
         this.vendorRepository = vendorRepository;
