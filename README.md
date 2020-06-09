@@ -8,3 +8,4 @@ You can learn about my Spring Framework 5 Online course [here.](http://courses.s
 Notes:
 - This project is using the https://api.predic8.de/shop/docs as example
 - This project uses MapStruct to map domain and DTO classes.
+- This project uses Swagger to document API.
