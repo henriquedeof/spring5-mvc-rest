@@ -11,3 +11,4 @@ Notes:
 - This project uses Swagger to document API.
 - This project uses Content Negotiation in order to provide responses in JSON or XML
     - jackson-dataformat-xml and woodstox-core-asl are libraries to provide that.
+    - It is also creating XSD schema. There is a XSD generator on: https://www.freeformatter.com/xsd-generator.html
