@@ -9,3 +9,5 @@ Notes:
 - This project is using the https://api.predic8.de/shop/docs as example
 - This project uses MapStruct to map domain and DTO classes.
 - This project uses Swagger to document API.
+- This project uses Content Negotiation in order to provide responses in JSON or XML
+    - jackson-dataformat-xml and woodstox-core-asl are libraries to provide that.
