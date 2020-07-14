@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 /**
  * Created by jt on 10/6/17.
  */
-@ControllerAdvice //This annotation makes this class being invoked when any exception occurs. Then it will look if there is exists a correspondent/specialized exception.
+@ControllerAdvice //This annotation makes this class being invoked when any exception, thrown from a Controller, occurs. Then it will look if there exists a correspondent/specialized exception.
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({ResourceNotFoundException.class}) //When the exception ResourceNotFoundException is thrown by any class/method this method is invoked.
